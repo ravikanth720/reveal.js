@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+		<link rel="stylesheet" href="css/theme/league.css" id="theme">
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -41,7 +41,7 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>ECMAScript 2015</h1>
+					<h1>ECMAScript 6</h1>
 					<h3>The future of JavaScript</h3>
 					<p>
 						<small><a href="#">Ravikanth Valiveti</a></small>
@@ -51,19 +51,17 @@
 				<section>
 					<h2>Agenda</h2>
 					<ul>
-						<li>Introduction</li>
 						<li>Variable Scoping</li>
-						<li>Destructuring</li>
 						<li>Functions</li>
-						<li>Template Strings</li>
 						<li>Classes and Inheritance</li>
+						<li>Template Strings</li>
 					</ul>
 				</section>
 
 				<!-- ECMAScript 2015 Introduction -->
 				<section>
 					<section>
-						<h2>What is ECMAScript 2015?</h2>
+						<h2>What is ECMAScript 6?</h2>
 						<br>
 						<ul>
 						<li>The latest standard for scripting languages.</li>
@@ -71,10 +69,10 @@
 					</ul>
 						<br>
 					</section>
-					<section>
+					<!-- <section>
 						<h2>History</h2>
-						<p>ECMAScript 3 --> 5 and now 6.  4 is abandoned</p>
-					</section>
+						<p>ECMAScript 3, 5 and now 6.  4 is abandoned</p>
+					</section> -->
 					<section>
 						<h2>What's new?</h2>
 						<p>Many things!</p>
@@ -109,6 +107,10 @@ I'm declared inside if block
 <p>
 
 						<br>
+						<aside class="notes">
+							Only function level scope. Any variable declared with var is available throughout the function.
+							when I print x before declaring it, it still has a value of undefined.
+						</aside>
 					</section>
 
 					<section>
@@ -132,6 +134,10 @@ OUTPUT
 <p class="fragment" style="color:#D1D180;">
 ReferenceError: x is not defined
 <p>
+	<aside class="notes">
+		The newly introduced let keyword allows block scoped variables
+		This is helpful inside loops.
+	</aside>
 					</section>
 					<section>
 						<h2><span style="color:#D1D180;">let</span> keyword</h2>
@@ -167,13 +173,6 @@ I'm declared inside if block
 					<section>
 						<h2>Changes in Functions</h2>
 						<br>
-						<ul>
-							<li>Arrow Functions</li>
-							<li>Default Parameters</li>
-							<li>Rest Parameters</li>
-							<li>Spread Operator</li>
-						</ul>
-						<br>
 					</section>
 
 					<section>
@@ -193,6 +192,11 @@ var multiply = function(a,b){
 	return a*b;
 }
 				</code></pre>
+
+				<aside class="notes">
+					here the anonymous function is assigned to multiply.
+					With new arrow syntax, the values inside paranthesis are parameters and the return value comes after the fat arrow.
+				</aside>
 					</section>
 
 					<section>
@@ -231,11 +235,11 @@ function printSum(a=3, b=6){
 > printSum();
 > 9
 
-> printSum(a = 5, b = 5);
+> printSum(5, 5);
 > 10
 						</code></pre><br>
 					</section>
-
+<!--
 					<section>
 						<h2>Rest Parameters</h2>
 						<p>This allows variable number of parameters to functions</p>
@@ -252,17 +256,17 @@ function printSum(a, b, ...rest){
 > printSum(1, 2, 3, 4, 5, 6);
 > 21
 						</code></pre><br>
-					</section>
+					</section> -->
 
 					<section>
 						<h2>Rest Parameters</h2>
 						<p>This allows variable number of parameters to functions</p>
 						<pre><code class="hljs" data-trim contenteditable>
-function printSum(a, b, ...rest){
+function printSum(a, b, ...other){
 
 	console.log("a ="+a+" b = "+b);
-	console.log("rest :")
-	console.log(rest);
+	console.log("other :")
+	console.log(other);
 
 }
 						</code></pre><br>
@@ -272,318 +276,188 @@ function printSum(a, b, ...rest){
 
 > printSum(1, 2, 3, 4, 5, 6);
 > a = 1 b = 2
-> rest:
+> other:
 > Array [ 3, 4, 5, 6 ]
 
 						</code></pre>
-
+						<aside class="notes">
+							Here the first two parameters are assigned to a, b
+							the rest of the parameters come in as an array and it is assigned to rest
+						</aside>
 					</section>
 
 					<section>
 						<h2>Spread Operator</h2>
-						<p>Substitute a single iterable object for multiple parameters</p>
+						<p>Substitutes	 a single iterable object for multiple parameters</p>
 						<pre><code class="hljs" data-trim contenteditable>
-function printSum(a, b, ...rest){
+> var nums = [1,2,3,4,5,6,7,8];
 
-	console.log("a ="+a+" b = "+b);
-	console.log("rest :")
-	console.log(rest);
-
-}
+//find minimum of the nums
+> Math.min(...nums);
+> 1
 						</code></pre><br>
-						<br>
-						Rest parameter
-						<pre><code class="hljs" data-trim contenteditable>
+				Old JavaScript
+				<pre><code class="hljs" data-trim contenteditable>
+> Math.min(nums);
+> NaN
 
-> printSum(1, 2, 3, 4, 5, 6);
-> a = 1 b = 2
-> rest:
-> Array [ 3, 4, 5, 6 ]
+This gives our output
+>Math.min(1, 2, 3, 4, 5, 6, 7, 8);
+> 1
 
-						</code></pre>
-
+Also
+> Math.min.apply(Math, nums);
+> 1
+				</code></pre><br/><br/>
+				<aside class="notes">
+					Spread operator is similar to rest parameters except it is used while calling functions with multiple parameters.
+				</aside>
 					</section>
 
 				</section>
+<!--
+
+				<section>
+					<section>
+						<h2>Classes and Inheritance</h2>
+						<br>
+
+						<p>Classes are introduced in ECMAScript 2015.</p>
+						<pre><code class="hljs" data-trim contenteditable>
+class Vehicle{
+    constructor(type){
+          this.type = type;
+     }
+
+    toString(){  // no need of function keyword
+          return "This is a "+this.type+" vehicle.";
+     }
+}
+
+						</code></pre>
+OUTPUT
+<pre><code class="hljs" data-trim contenteditable>
+
+> var vehicle = new Vehicle("road");
+> vehicle.toString();
+> This is a road vehicle.
+
+</code></pre><br>
+					</section>
+						<section>
+							<h2>Getters and Setters</h2>
+							<p><span style="color:#d1d180">get</span> and <span style="color:#d1d180">set</span> keywords are used as follows</p>
+							<pre><code class="hljs" data-trim contenteditable>
+class Vehicle{
+ constructor(type){
+  this.type = type;
+ }
+  get getType(){
+		return this.type;
+	}
+
+	set setType(inp){
+		this.type = imp;
+		console.log("type is set");
+	}
+}
+
+							</code></pre>
+					OUTPUT
+					<pre><code class="hljs" data-trim contenteditable>
+> var vehicle = new Vehicle("road");
+> vehicle.getType;
+> road
+> vehicle.setType = water;
+> water
+> Type is set
+					</code></pre><br><br>
+						</section>
+
+					<section>
+						<h2>Inheritance</h2>
+						<br>
+
+						<p>Inheritence is supported by using <bold><span style="color:#d1d180;">extends</span></bold> keyword</p>
+						<pre><code class="hljs" data-trim contenteditable>
+class Car extends Vehicle{
+ constructor(type, make){
+  super(type);
+  this.make = make;
+ }
+
+ toString(){  // no need of function keyword
+  return super.toString()+" It's make is "+this.make ;
+ }
+}
+
+						</code></pre>
+OUTPUT
+<pre><code class="hljs" data-trim contenteditable>
+
+> var car = new Car("road", "Audi");
+> car.toString();
+> This is a road vehicle. It's make is Audi
+
+</code></pre><br>
+					</section>
+
+
+				</section>
+
+
+<section>
+	<h2>Template Strings</h2>
+	<br>
+
+	<p>Templating in strings is introduced in ECMAScript 2015<p/>
+		<p><bold><span style="color:#d1d180;">Backquotes</span></bold>  are used for template strings.</p>
+Old JavaScript
+	<pre><code class="hljs" data-trim contenteditable>
+ console.log("Welcome "+user+" to the site!");
+	</code></pre>
+With template strings it is very simplified
+<pre><code class="hljs" data-trim contenteditable>
+// ${...} - formats to javascript.
+console.log(`Welcome ${user} to the site!`);
+//Template strings also support multiline strings.
+console.log(`This is a long line
+that has to run to
+third line`);
+</code></pre><br>
+</section>
+ -->
 
 
 <!-- ---------------------------------------------------------------------- -->
-				<section>
-					<h2>Touch Optimized</h2>
-					<p>
-						Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
-					</p>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## Markdown support
-
-						Write content using inline or external Markdown.
-						Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-
-						```
-						<section data-markdown>
-						  ## Markdown support
-
-						  Write content using inline or external Markdown.
-						  Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-						</section>
-						```
-					</script>
-				</section>
-
-				<section>
-					<section id="fragments">
-						<h2>Fragments</h2>
-						<p>Hit the next arrow...</p>
-						<p class="fragment">... to step through ...</p>
-						<p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
-
-						<aside class="notes">
-							This slide has fragments which are also stepped through in the notes window.
-						</aside>
-					</section>
-					<section>
-						<h2>Fragment Styles</h2>
-						<p>There's different types of fragments, like:</p>
-						<p class="fragment grow">grow</p>
-						<p class="fragment shrink">shrink</p>
-						<p class="fragment fade-out">fade-out</p>
-						<p class="fragment current-visible">current-visible</p>
-						<p class="fragment highlight-red">highlight-red</p>
-						<p class="fragment highlight-blue">highlight-blue</p>
-					</section>
-				</section>
-
-				<section id="transitions">
-					<h2>Transition Styles</h2>
-					<p>
-						You can select from different transitions, like: <br>
-						<a href="?transition=none#/transitions">None</a> -
-						<a href="?transition=fade#/transitions">Fade</a> -
-						<a href="?transition=slide#/transitions">Slide</a> -
-						<a href="?transition=convex#/transitions">Convex</a> -
-						<a href="?transition=concave#/transitions">Concave</a> -
-						<a href="?transition=zoom#/transitions">Zoom</a>
-					</p>
-				</section>
-
-				<section id="themes">
-					<h2>Themes</h2>
-					<p>
-						reveal.js comes with a few themes built in: <br>
-						<!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/black.css'); return false;">Black (default)</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/white.css'); return false;">White</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/league.css'); return false;">League</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/sky.css'); return false;">Sky</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/beige.css'); return false;">Beige</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/simple.css'); return false;">Simple</a> <br>
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/serif.css'); return false;">Serif</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/blood.css'); return false;">Blood</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/night.css'); return false;">Night</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/moon.css'); return false;">Moon</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/solarized.css'); return false;">Solarized</a>
-					</p>
-				</section>
-
-				<section>
-					<section data-background="#dddddd">
-						<h2>Slide Backgrounds</h2>
-						<p>
-							Set <code>data-background="#dddddd"</code> on a slide to change the background color. All CSS color formats are supported.
-						</p>
-						<a href="#" class="navigate-down">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png">
-						<h2>Image Backgrounds</h2>
-						<pre><code class="hljs">&lt;section data-background="image.png"&gt;</code></pre>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png" data-background-repeat="repeat" data-background-size="100px">
-						<h2>Tiled Backgrounds</h2>
-						<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
-					</section>
-					<section data-background-video="https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-color="#000000">
-						<div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-							<h2>Video Backgrounds</h2>
-							<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background-video="video.mp4,video.webm"&gt;</code></pre>
-						</div>
-					</section>
-					<section data-background="http://i.giphy.com/90F8aUepslB84.gif">
-						<h2>... and GIFs!</h2>
-					</section>
-				</section>
-
-				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
-					<h2>Background Transitions</h2>
-					<p>
-						Different background transitions are available via the backgroundTransition option. This one's called "zoom".
-					</p>
-					<pre><code class="hljs">Reveal.configure({ backgroundTransition: 'zoom' })</code></pre>
-				</section>
-
-				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
-					<h2>Background Transitions</h2>
-					<p>
-						You can override background transitions per-slide.
-					</p>
-					<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background-transition="zoom"&gt;</code></pre>
-				</section>
-
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code class="hljs" data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) {
-        node.className += ' roll';
-      }
-    }
-  }
-}
-					</code></pre>
-					<p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
-				</section>
-
-				<section>
-					<h2>Marvelous List</h2>
-					<ul>
-						<li>No order here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Fantastic Ordered List</h2>
-					<ol>
-						<li>One is smaller than...</li>
-						<li>Two is smaller than...</li>
-						<li>Three!</li>
-					</ol>
-				</section>
-
-				<section>
-					<h2>Tabular Tables</h2>
-					<table>
-						<thead>
-							<tr>
-								<th>Item</th>
-								<th>Value</th>
-								<th>Quantity</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Apples</td>
-								<td>$1</td>
-								<td>7</td>
-							</tr>
-							<tr>
-								<td>Lemonade</td>
-								<td>$2</td>
-								<td>18</td>
-							</tr>
-							<tr>
-								<td>Bread</td>
-								<td>$3</td>
-								<td>2</td>
-							</tr>
-						</tbody>
-					</table>
-				</section>
-
-				<section>
-					<h2>Clever Quotes</h2>
-					<p>
-						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
-					</p>
-					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
-						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
-					</blockquote>
-				</section>
-
-				<section>
-					<h2>Intergalactic Interconnections</h2>
-					<p>
-						You can link between slides internally,
-						<a href="#/2/3">like this</a>.
-					</p>
-				</section>
-
-				<section>
-					<h2>Speaker View</h2>
-					<p>There's a <a href="https://github.com/hakimel/reveal.js#speaker-notes">speaker view</a>. It includes a timer, preview of the upcoming slide as well as your speaker notes.</p>
-					<p>Press the <em>S</em> key to try it out.</p>
-
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
-				</section>
-
-				<section>
+				<!-- <section>
 					<h2>Export to PDF</h2>
 					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, here's an example:</p>
 					<iframe src="https://www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
-				</section>
+				</section> -->
 
-				<section>
-					<h2>Global State</h2>
-					<p>
-						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-						will be added as a class to the document element when the slide is open. This lets you
-						apply broader style changes, like switching the page background.
-					</p>
-				</section>
-
-				<section data-state="customevent">
-					<h2>State Events</h2>
-					<p>
-						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-					</p>
-					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
-				</section>
-
-				<section>
-					<h2>Take a Moment</h2>
-					<p>
-						Press B or . on your keyboard to pause the presentation. This is helpful when you're on stage and want to take distracting slides off the screen.
-					</p>
-				</section>
-
-				<section>
-					<h2>Much more</h2>
+				<section style="text-align: left;">
+					<h2>Other Concepts</h2>
 					<ul>
-						<li>Right-to-left support</li>
-						<li><a href="https://github.com/hakimel/reveal.js#api">Extensive JavaScript API</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#auto-sliding">Auto-progression</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#parallax-background">Parallax backgrounds</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#keyboard-bindings">Custom keyboard bindings</a></li>
+						<li>Classes - Getters and Setters</li>
+						<li>Inheritance</li>
+						<li>Template Strings</li>
+						<li>more.....</li>
 					</ul>
 				</section>
 
+				<!-- References -->
 				<section style="text-align: left;">
-					<h1>THE END</h1>
-					<p>
-						- <a href="http://slides.com">Try the online editor</a> <br>
-						- <a href="https://github.com/hakimel/reveal.js">Source code &amp; documentation</a>
-					</p>
+					<h2>References</h2>
+					<p style="font-size:0.8em;font-family:Times New Roman;">
+						[1] ECMAScript 6 support in Mozilla, https://developer.mozilla.org/en-US/docs/Web/JavaScript/New_in_JavaScript/ECMAScript_6_support_in_Mozilla <br>
+						</p><p style="font-size:0.8em;font-family:Times New Roman;">[2] ECMAScript 6 — New Features: Overview & Comparison, http://es6-features.org
+						</p><p style="font-size:0.8em;font-family:Times New Roman;">[3] Ustun Ozgur, Introduction to EcmaScript 6: The Next Version of JavaScript, https://www.youtube.com/watch?v=SlrirWY9JTk
+					  </p><p style="font-size:0.8em;font-family:Times New Roman;">[4] Brent Farris, "ECMAScript6 Playlist", https://www.youtube.com/watch?v=CRZNTSqjZ-E&list=PLOySAdzi_tzLtLHK623Cm0hkoV9SEbvcE
+				</section>
+
+				<section style="text-align: left;">
+					<h1>Thank You   [:)]</h1>
 				</section>
 
 			</div>
