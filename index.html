@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js – The HTML Presentation Framework</title>
+		<title>ECMAScript 6</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
@@ -41,62 +41,273 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>Reveal.js</h1>
-					<h3>The HTML Presentation Framework</h3>
+					<h1>ECMAScript 2015</h1>
+					<h3>The future of JavaScript</h3>
 					<p>
-						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
+						<small><a href="#">Ravikanth Valiveti</a></small>
 					</p>
 				</section>
 
 				<section>
-					<h2>Hello There</h2>
-					<p>
-						reveal.js enables you to create beautiful interactive slide decks using HTML. This presentation will show you examples of what it can do.
-					</p>
+					<h2>Agenda</h2>
+					<ul>
+						<li>Introduction</li>
+						<li>Variable Scoping</li>
+						<li>Destructuring</li>
+						<li>Functions</li>
+						<li>Template Strings</li>
+						<li>Classes and Inheritance</li>
+					</ul>
 				</section>
 
-				<!-- Example of nested vertical slides -->
+				<!-- ECMAScript 2015 Introduction -->
 				<section>
 					<section>
-						<h2>Vertical Slides</h2>
-						<p>Slides can be nested inside of each other.</p>
-						<p>Use the <em>Space</em> key to navigate through all slides.</p>
+						<h2>What is ECMAScript 2015?</h2>
 						<br>
-						<a href="#" class="navigate-down">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 1</h2>
-						<p>Nested slides are useful for adding additional detail underneath a high level horizontal slide.</p>
-					</section>
-					<section>
-						<h2>Basement Level 2</h2>
-						<p>That's it, time to go back up.</p>
+						<ul>
+						<li>The latest standard for scripting languages.</li>
+						<li>Not yet completely supported by the modern browsers.</li>
+					</ul>
 						<br>
-						<a href="#/2">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
-						</a>
+					</section>
+					<section>
+						<h2>History</h2>
+						<p>ECMAScript 3 --> 5 and now 6.  4 is abandoned</p>
+					</section>
+					<section>
+						<h2>What's new?</h2>
+						<p>Many things!</p>
+						<br>
 					</section>
 				</section>
 
+				<!-- Variable Scope -->
 				<section>
-					<h2>Slides</h2>
-					<p>
-						Not a coder? Not a problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slides.com" target="_blank">http://slides.com</a>.
-					</p>
+					<section>
+						<h2>Variable Scope</h2>
+						<br>
+
+						<p>JavaScript has no block scope.</p>
+						<pre><code class="hljs" data-trim contenteditable>
+
+function printSomething( ) {
+
+	console.log("The variable x = "+x);
+	if( true ) {
+		var x = "I'm declared inside if block";
+		console.log(x);
+	}
+
+}
+
+						</code></pre>
+OUTPUT
+<p class="fragment" style="color:#D1D180;">
+The variable x = undefined<br>
+I'm declared inside if block
+<p>
+
+						<br>
+					</section>
+
+					<section>
+						<h2><span style="color:#D1D180;">let</span> keyword</h2>
+						<p>let keyword allows block level scoping</p>
+
+						<pre><code class="hljs" data-trim contenteditable>
+
+function printSomething( ) {
+
+	console.log("The variable x = "+x);
+	if( true ) {
+		let x = "I'm declared inside if block";
+		console.log(x);
+	}
+
+}
+
+						</code></pre>
+OUTPUT
+<p class="fragment" style="color:#D1D180;">
+ReferenceError: x is not defined
+<p>
+					</section>
+					<section>
+						<h2><span style="color:#D1D180;">let</span> keyword</h2>
+						<p>let keyword allows block level scoping</p>
+
+						<pre><code class="hljs" data-trim contenteditable>
+
+function printSomething( ) {
+
+	//console.log("The variable x = "+x);
+	if( true ) {
+		let x = "I'm declared inside if block";
+		console.log(x);
+	}
+
+}
+
+						</code></pre>
+OUTPUT
+<p class="fragment" style="color:#D1D180;">
+I'm declared inside if block
+<p>
+					</section>
+					<section>
+						<h2><span style="color:#D1D180;">const</span> keyword</h2>
+						<p>const keyword allows declaration of constants</p>
+						<br>
+					</section>
 				</section>
 
+				<!-- Functions -->
 				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
-					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
+					<section>
+						<h2>Changes in Functions</h2>
+						<br>
+						<ul>
+							<li>Arrow Functions</li>
+							<li>Default Parameters</li>
+							<li>Rest Parameters</li>
+							<li>Spread Operator</li>
+						</ul>
+						<br>
+					</section>
+
+					<section>
+						<h2><span style="color:#D1D180;">Arrow</span> functions</h2>
+						<p>A shorter syntax to declare functions</p>
+
+						<pre><code class="hljs" data-trim contenteditable>
+var multiply = (a, b) => a*b;
+						</code></pre><br/>
+				Usage
+				<pre><code class="hljs" data-trim contenteditable>
+multiply(5,4);
+				</code></pre><br>
+				Older Syntax
+				<pre><code class="hljs" data-trim contenteditable>
+var multiply = function(a,b){
+	return a*b;
+}
+				</code></pre>
+					</section>
+
+					<section>
+						<h2><span style="color:#D1D180;">Arrow</span> functions</h2>
+						<p>Some examples</p>
+
+						<pre><code class="hljs" data-trim contenteditable>
+var nums = [1,2,3,4,5,6,7,8];
+
+//filter out even numbers
+var evens = nums.filter(x => x%2 == 0);
+
+//generate odds from even array
+var odds = evens.map(v => v+1);
+						</code></pre><br/>
+				Output
+				<pre><code class="hljs" data-trim contenteditable>
+> evens
+> Array [ 2, 4, 6, 8 ]
+
+> odds
+> Array [ 3, 5, 7, 9 ]
+				</code></pre><br>
+					</section>
+
+					<section>
+						<h2>Default Values for Parameters</h2>
+						<pre><code class="hljs" data-trim contenteditable>
+function printSum(a=3, b=6){
+	return a+b;
+}
+						</code></pre><br>
+						<br>
+						Output
+						<pre><code class="hljs" data-trim contenteditable>
+> printSum();
+> 9
+
+> printSum(a = 5, b = 5);
+> 10
+						</code></pre><br>
+					</section>
+
+					<section>
+						<h2>Rest Parameters</h2>
+						<p>This allows variable number of parameters to functions</p>
+						<pre><code class="hljs" data-trim contenteditable>
+function printSum(a, b, ...rest){
+
+	return a+b+rest.reduce((a, b)=> a+b);
+
+}
+						</code></pre><br>
+						<br>
+						Output
+						<pre><code class="hljs" data-trim contenteditable>
+> printSum(1, 2, 3, 4, 5, 6);
+> 21
+						</code></pre><br>
+					</section>
+
+					<section>
+						<h2>Rest Parameters</h2>
+						<p>This allows variable number of parameters to functions</p>
+						<pre><code class="hljs" data-trim contenteditable>
+function printSum(a, b, ...rest){
+
+	console.log("a ="+a+" b = "+b);
+	console.log("rest :")
+	console.log(rest);
+
+}
+						</code></pre><br>
+						<br>
+						Rest parameter
+						<pre><code class="hljs" data-trim contenteditable>
+
+> printSum(1, 2, 3, 4, 5, 6);
+> a = 1 b = 2
+> rest:
+> Array [ 3, 4, 5, 6 ]
+
+						</code></pre>
+
+					</section>
+
+					<section>
+						<h2>Spread Operator</h2>
+						<p>Substitute a single iterable object for multiple parameters</p>
+						<pre><code class="hljs" data-trim contenteditable>
+function printSum(a, b, ...rest){
+
+	console.log("a ="+a+" b = "+b);
+	console.log("rest :")
+	console.log(rest);
+
+}
+						</code></pre><br>
+						<br>
+						Rest parameter
+						<pre><code class="hljs" data-trim contenteditable>
+
+> printSum(1, 2, 3, 4, 5, 6);
+> a = 1 b = 2
+> rest:
+> Array [ 3, 4, 5, 6 ]
+
+						</code></pre>
+
+					</section>
+
 				</section>
 
+
+<!-- ---------------------------------------------------------------------- -->
 				<section>
 					<h2>Touch Optimized</h2>
 					<p>
